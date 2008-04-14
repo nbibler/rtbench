@@ -4,15 +4,15 @@ module Tasks
 		
 		class Complex < RTBench::Task
 
-			def content_for_liquid
+			def self.content_for_liquid
 				"{% if 1 > 0 and 5 < 10 %}{{ post.title }}{% endif %}"
 			end
 			
-			def content_for_erb
+			def self.content_for_erb
       	"<% if 1 > 0 and 5 < 10 %><%= post.title %><% end %>"
 			end
 			
-			def content_for_haml
+			def self.content_for_haml
 <<-HAML
 - if 1 > 0 and 5 < 10
   = post.title

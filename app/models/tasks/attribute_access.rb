@@ -5,15 +5,15 @@ module Tasks
 	#
 	class AttributeAccess < RTBench::Task
 		
-		def content_for_liquid
+		def self.content_for_liquid
 			"{{post.title}}"
 		end
 		
-		def content_for_haml
+		def self.content_for_haml
 			"= post.title"
 		end
 		
-		def content_for_erb
+		def self.content_for_erb
 			"<%= post.title %>"
 		end
 		

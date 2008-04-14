@@ -43,7 +43,7 @@ class TemplateTest
       TASKS.each do |task|
 				HANDLERS.each do |handler|
 					results.report("#{task.to_s} (#{handler.to_s})") do
-						TESTS.times { handler.new.process(task.new, vars) }
+						TESTS.times { handler.new.process(task, vars) }
 					end
 				end
       end
