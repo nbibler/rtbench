@@ -1,0 +1,36 @@
+== RTBench
+
+RTBench is intended to fairly and openly compare popular Ruby (and Rails) 
+template engines.  This is accomplished by setting up a standard set of 
+benchmarks and running them several times across multiple template engines.
+
+=== Current benchmarks
+
+This application currently benchmarks the following engines:
+
+* ERB[http://www.ruby-doc.org/stdlib/libdoc/erb/rdoc/]
+* Liquid[http://www.liquidmarkup.org/]
+* HAML[http://haml.hamptoncatlin.com/]
+
+The following activities are tested in each engine:
+
+Accessing attributes:: Take an object and output an attribute
+Looping:: Loop over a set of objects and output an attribute for each object
+Filtering:: Perform a manipulation of a variable value (time formatting)
+Conditionals (Simple):: Run a simple conditional and output an attribute
+Conditionals (Complex):: Run a multi-test conditional and output an attribute
+
+=== How to run
+
+Although this is a Rails framework, the benchmarks are run outside of a 
+running server application.  Instead, in the root of the checkout directory:
+
+  ruby bench.rb  # or just
+  ./bench.rb
+
+==== Copyright and license
+
+Hrm.. I don't know that this particularly deserves a copyright.. so...
+
+Author:: {Nathaniel Bibler}[http://www.nathanielbibler.com]
+License:: Released under the {Ruby license}[http://www.ruby-lang.org/en/about/license.txt/]
