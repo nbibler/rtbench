@@ -2,63 +2,19 @@
 require 'config/environment'
 require 'benchmark'
 
-TESTS = 10_000
-
-class Hash
-  def to_binding(object = Object.new)
-    object.instance_eval("def binding_for(#{keys.join(",")}) binding end")
-    object.binding_for(*values)
-  end
-end
-
-module Templates
-  LIQUID, ERB, HAML = 0, 1, 2
-
-  # Templates
-  TEMPLATES = {
-    
-    :print => [
-      "<h2>{{posts.first.title}}</h2>", 
-      "<h2><%= posts.first.title %></h2>",
-      "%h2= posts.first.title"
-    ],
-    
-    :loop => [ 
-      "{% for post in posts %}{{ post.title }}{% endfor %}",
-      "<% for post in posts %><%= post.title %><% end %>",
-<<-HAML
-- for post in posts
-  = post.title
-HAML
-    ],
-    
-    :filter => [
-      "{{ time | date: '%B %d, %Y %H:%M:%S' }}",
-      "<%= time.strftime(\"%B %d, %Y %H:%M:%S\") %>",
-			"= time.strftime(\"%B %d, %Y %H:%M:%S\")"
-    ],
-  
-    :conditional => [
-      "{% if 1 > 0 %}{{ post.title }}{% endif %}",
-      "<% if 1 > 0 %><%= post.title %><% end %>",
-<<-HAML
-- if 1 > 0
-  = post.title
-HAML
-    ],
-  
-    :complex_conditional => [
-      "{% if 1 > 0 and 5 < 10 %}{{ post.title }}{% endif %}",
-      "<% if 1 > 0 and 5 < 10 %><%= post.title %><% end %>",
-<<-HAML
-- if 1 > 0 and 5 < 10
-  = post.title
-HAML
-    ]
-    
-  }
-
-end
+TESTS 			= 100
+HANDLERS 		= [
+								Handlers::Erb, 
+								Handlers::Haml, 
+								Handlers::Liquid
+							]
+TASKS				=	[ 
+								Tasks::AttributeAccess,
+								Tasks::Filter,
+								Tasks::ForLoop,
+								Tasks::Conditional::Complex,
+								Tasks::Conditional::Simple
+							]
 
 class TemplateTest
   
@@ -84,10 +40,12 @@ class TemplateTest
     }
 
     Benchmark.bmbm do |results|
-      Templates::TEMPLATES.each_pair do |name, templates|
-        results.report("Liquid:  #{name.to_s.titleize}")  { TESTS.times { Liquid::Template.parse(templates[Templates::LIQUID]).render(vars) } }
-        results.report("HAML:    #{name.to_s.titleize}")  { TESTS.times { Haml::Engine.new(templates[Templates::ERB]).render(Object.new, vars) } }
-        results.report("ERB:     #{name.to_s.titleize}")  { TESTS.times { ERB.new(templates[Templates::ERB]).result(vars.to_binding) } }
+      TASKS.each do |task|
+				HANDLERS.each do |handler|
+					results.report("#{task.to_s} (#{handler.to_s})") do
+						TESTS.times { handler.new.process(task.new, vars) }
+					end
+				end
       end
     end
   end

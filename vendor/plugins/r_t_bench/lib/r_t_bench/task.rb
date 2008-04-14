@@ -20,7 +20,7 @@ module RTBench
 		#
 		def for(handler)
 			raise ArgumentError unless handler.kind_of?(Handler)
-			self.send("content_for_#{handler.class.to_s.underscore}")
+			self.send("content_for_#{handler.class.to_s.split('::').last.underscore}")
 		end
 		
 		
