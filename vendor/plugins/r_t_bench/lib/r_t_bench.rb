@@ -1,4 +1,3 @@
-require 'hash'
 require 'r_t_bench/handler'
 require 'r_t_bench/task'
 

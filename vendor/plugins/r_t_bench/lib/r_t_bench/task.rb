@@ -20,7 +20,18 @@ module RTBench
 		#
 		def for(handler)
 			raise ArgumentError unless handler.kind_of?(Handler)
-			content_for handler
+			self.send("content_for_#{handler.class.to_s.underscore}")
+		end
+		
+		
+		##
+		# Returns +nil+ if the requested method is an undefined content_for_XXXX
+		# method.
+		#
+		def method_missing(method, *args)
+			if method =~ /\Acontent_for_/
+				return
+			end
 		end
 		
 		

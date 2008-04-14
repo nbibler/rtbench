@@ -27,11 +27,9 @@ class RTBench::HandlerTest < Test::Unit::TestCase
 		setup do
 			@handler	= ErbHandler.new
 			@task			=	ErbTask.new
-			@task.stubs(:content_for).with(@handler).returns("<%= \"test\" %>")
 		end
 		
 		should "properly render the task" do
-			@task.expects(:content_for).with(@handler).returns("<%= \"test\" %>")
 			assert_equal "test", @handler.process(@task)
 		end
 		

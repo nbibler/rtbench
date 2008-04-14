@@ -1,10 +1,7 @@
 class ErbTask < RTBench::Task
-	
-	
-	private
-	
-	
-	def content_for(handler)
+
+	def content_for_erb_handler
+		"<%= \"test\" %>"
 	end
 	
 end

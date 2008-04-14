@@ -2,3 +2,4 @@ config/database.yml
 tmp/*
 log/*
 doc/app
+db/*.sqlite3

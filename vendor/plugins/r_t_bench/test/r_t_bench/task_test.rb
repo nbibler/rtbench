@@ -13,8 +13,8 @@ class RTBench::TaskTest < Test::Unit::TestCase
 		end
 		
 		context ".for with a Handler" do
-			should "raise an NotImplementedError" do
-				assert_raise(RTBench::NotImplementedError) { @task.for RTBench::Handler.new }
+			should "be nil" do
+				assert_nil @task.for(RTBench::Handler.new)
 			end
 		end
 		
