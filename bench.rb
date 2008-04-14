@@ -33,6 +33,8 @@ class TemplateTest
   end
   
   def self.run
+		skipped = []
+		
     vars = {
       "posts"   => Post.find(:all),
       "post"    => Post.find(:first),
@@ -43,12 +45,28 @@ class TemplateTest
       TASKS.each do |task|
 				HANDLERS.each do |handler|
 					results.report("#{task.to_s} (#{handler.to_s})") do
-						TESTS.times { handler.new.process(task, vars) }
+						begin
+							TESTS.times { handler.new.process(task, vars) }
+						rescue RTBench::ContentForHandlerNotImplementedError => e
+							skipped << "#{task.to_s} (#{handler.to_s}) - Task content not found for handler"
+						end
 					end
 				end
       end
     end
+
+		report_skipped(skipped) unless skipped.empty?
   end
+
+	private
+
+	def self.report_skipped(skipped = [])
+		skipped.uniq!
+		puts ""
+		puts "=== Tests Skipped ==="
+		puts "* " << skipped.join("\n* ")
+		puts ""
+	end
   
 end
 

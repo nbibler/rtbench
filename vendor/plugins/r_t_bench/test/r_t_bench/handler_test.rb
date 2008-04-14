@@ -13,10 +13,11 @@ class RTBench::HandlerTest < Test::Unit::TestCase
 		end
 		
 		context ".process" do
-			should "raise a NotImplementedError" do
-				assert_raise(RTBench::NotImplementedError) do
+			should "raise a ProcessNotImplementedError" do
+				assert_raise(RTBench::ProcessNotImplementedError) do
 					@handler.process Object.new
 				end
+				assert_kind_of RTBench::NotImplementedError, RTBench::ProcessNotImplementedError.new
 			end
 		end
 		
@@ -26,7 +27,7 @@ class RTBench::HandlerTest < Test::Unit::TestCase
 		
 		setup do
 			@handler	= ErbHandler.new
-			@task			=	ErbTask.new
+			@task			=	ErbTask
 		end
 		
 		should "properly render the task" do
