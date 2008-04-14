@@ -1,5 +1,6 @@
 require 'r_t_bench/handler'
 require 'r_t_bench/task'
+require 'r_t_bench/registrar'
 
 ##
 #

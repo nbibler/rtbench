@@ -20,3 +20,5 @@ HAML
 	end
 	
 end
+
+BenchmarkRegistrar.register_task(Tasks::ForLoop)

@@ -2,19 +2,7 @@
 require 'config/environment'
 require 'benchmark'
 
-TESTS 			= 100
-HANDLERS 		= [
-								Handlers::Erb, 
-								Handlers::Haml, 
-								Handlers::Liquid
-							]
-TASKS				=	[ 
-								Tasks::AttributeAccess,
-								Tasks::Filter,
-								Tasks::ForLoop,
-								Tasks::Conditional::Complex,
-								Tasks::Conditional::Simple
-							]
+TESTS 			= 10_000
 
 class TemplateTest
   
@@ -42,8 +30,8 @@ class TemplateTest
     }
 
     Benchmark.bmbm do |results|
-      TASKS.each do |task|
-				HANDLERS.each do |handler|
+      BenchmarkRegistrar.tasks.each do |task|
+				BenchmarkRegistrar.handlers.each do |handler|
 					results.report("#{task.to_s} (#{handler.to_s})") do
 						begin
 							TESTS.times { handler.new.process(task, vars) }

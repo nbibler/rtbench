@@ -20,3 +20,5 @@ module Tasks
 	end
 	
 end
+
+BenchmarkRegistrar.register_task(Tasks::AttributeAccess)

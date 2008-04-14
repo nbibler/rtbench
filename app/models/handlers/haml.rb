@@ -9,3 +9,5 @@ module Handlers
 	end
 	
 end
+
+BenchmarkRegistrar.register_handler(Handlers::Haml)
