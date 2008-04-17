@@ -1,0 +1,7 @@
+#
+# Tasks for radius
+#
+
+attribute_access: "<radius:item><radius:name /></radius:item>"
+for_loop: "<radius:collection:for_each><radius:name /></radius:collection:for_each>"
+time_manipulation: "<radius:time:format_time format=\"%B %d, %Y %H:%M:%S\" />"

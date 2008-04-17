@@ -1,0 +1,9 @@
+#
+# Tasks for Liquid
+#
+
+attribute_access: "{{ single_item.name }}"
+conditional_simple: "{% if 1 > 0 %}{{ single_item.name }}{% endif %}"
+conditional_complex: "{% if 1 > 0 and 5 < 10 %}{{ single_item.name }}{% endif %}"
+for_loop: "{% for item in item_pool %}{{ item.name }}{% endfor %}"
+time_manipulation: "{{ time | date: \"%B %d, %Y %H:%M:%S\"}}"

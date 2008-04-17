@@ -1,0 +1,15 @@
+#
+# Tasks for HAML
+#
+
+attribute_access: "= single_item.name"
+conditional_simple: |
+  - if 1 > 0
+    = single_item.name
+conditional_complex: |
+  - if 1 > 0 and 5 < 10
+    = single_item.name
+for_loop: |
+  - for item in item_pool
+    = item.name
+time_manipulation: "= time.strftime(\"%B %d, %Y %H:%M:%S\")"
