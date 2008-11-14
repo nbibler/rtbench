@@ -8,7 +8,7 @@ APP_ROOT    = File.dirname(__FILE__)
 LOG_PATH    = File.join(APP_ROOT, 'logs')
 
 TEST_RUNS   = 100
-POOL_SIZES  = [ 100 ] #, 1_000 ]#, 10_000, 100_000 ]
+POOL_SIZES  = [ 1_000 ] #, 1_000 ]#, 10_000, 100_000 ]
 
 require 'r_t_bench'
 LOG         = RTBench::LOG

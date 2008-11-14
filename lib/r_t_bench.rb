@@ -1,5 +1,6 @@
 require 'benchmark'
 require 'logger'
+require 'object'
 require 'inflector'
 require 'r_t_bench/identifiable'
 
